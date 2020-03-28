@@ -4,51 +4,69 @@ import Hello from './Hello';
 import './style.css';
 
 
-class Contador extends Component {
+class Formulario extends Component {
   constructor(props){
     super(props);
 
     this.state = {
-      contador: 0
-    };
+       email: '',
+       password: ''
+    }
   }
 
-  aumentar = () => {
-    this.setState({
-      contador: this.state.contador + 1
-    })
+  synChanges(value, property) {
+    let state = {}
+    state[property] = value;
+    this.setState(state);
+
   }
 
-  render () {
-    return (
+  submitForm = ()=>{
+    console.log(this.state);
+  }
+
+   render(){
+     return(
+      <form>
+        <input 
+          onChange={(ev) => {this.synChanges(ev.target.value, 'email') } }
+          type="email"
+          value={this.state.email}
+          placeholder="Email"/>
+        <input
+          onChange={(ev) => {this.synChanges(ev.target.value, 'password') } }
+          type="password"
+          value={this.state.password} 
+          placeholder="****" />
         <div>
-          <p>{this.state.contador}</p>
-          <button onClick={ this.aumentar }>Aumentar</button>
+          <input
+            onClick={ this.submitForm }
+            type="submit"
+            value="Iniciar en el password"/>
         </div>
-    )
-  }
+      </form>
+     )
+   }
 }
+
 
 class App extends Component {
-  constructor(){
+  constructor() {
     super();
-
     this.state = {
-      name: "React"
+      name: 'React'
     };
   }
 
-  render(){
-    let nombre = "Miguel";
-
-    return(
+  render() {
+    let nombre = "Uriel"; 
+    
+    return (
       <div>
-        <Contador />
+        <Formulario />
       </div>
-    )
+    );
   }
-
 }
-
 
 render(<App />, document.getElementById('root'));
