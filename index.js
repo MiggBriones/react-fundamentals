@@ -4,49 +4,31 @@ import Hello from './Hello';
 import './style.css';
 
 
-class Formulario extends Component {
+class Blog extends Component {
   constructor(props){
     super(props);
 
     this.state = {
-       email: '',
-       password: ''
+      articles: [
+        'Mi primer componente de React.',
+        'Introducción a React',
+        'Qué es React'
+      ]
     }
-  }
-
-  synChanges(value, property) {
-    let state = {}
-    state[property] = value;
-    this.setState(state);
 
   }
 
-  submitForm = ()=>{
-    console.log(this.state);
+  render(){
+    return(
+      <div>
+        {
+          this.state.articles.map((title)=> {
+            return <p>{title}</p>
+          })
+        }
+      </div>
+    )
   }
-
-   render(){
-     return(
-      <form>
-        <input 
-          onChange={(ev) => {this.synChanges(ev.target.value, 'email') } }
-          type="email"
-          value={this.state.email}
-          placeholder="Email"/>
-        <input
-          onChange={(ev) => {this.synChanges(ev.target.value, 'password') } }
-          type="password"
-          value={this.state.password} 
-          placeholder="****" />
-        <div>
-          <input
-            onClick={ this.submitForm }
-            type="submit"
-            value="Iniciar en el password"/>
-        </div>
-      </form>
-     )
-   }
 }
 
 
@@ -59,11 +41,10 @@ class App extends Component {
   }
 
   render() {
-    let nombre = "Uriel"; 
-    
+
     return (
       <div>
-        <Formulario />
+        <Blog />
       </div>
     );
   }
