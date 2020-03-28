@@ -3,32 +3,37 @@ import { render } from 'react-dom';
 import Hello from './Hello';
 import './style.css';
 
-// No de deben compartir elementos
-// para poder compartir elementos, información; utilizar PROPS
 
-// props = propiedades de creación del componente, son READONLY
+class Formulario extends Component {
+  constructor(props){
+    super(props);
 
-
-
-function A(props) {
-  console.log(props.children);
-  return <p>Hola {props.nombre}</p>;
-}
-
-function B(props) {
-  return <p>{props.nombre}: 10</p>;
-}
-
-function MiComponente() {
-  return <p>Hola mundo </p>;
-}
-
-class MiComponenteDeClase extends Component  {
-  render() {
-    return <p>Hola, soy de la clase.</p>;
+    this.state = {
+       email: '',
+       password: ''
+    }
   }
-}
 
+  synEmailChange(email) {
+
+  }
+
+   render(){
+     return(
+      <form>
+        <input 
+          conChange={(ev) => {this.synEmailChange(ev.target.value) } }
+          type="email"
+          value={this.state.email}
+          placeholder="Email"/>
+        <input type="password" value={this.state.password} placeholder="****" />
+        <div>
+          <input type="submit" value="Iniciar en el password"/>
+        </div>
+      </form>
+     )
+   }
+}
 
 
 class App extends Component {
@@ -40,15 +45,11 @@ class App extends Component {
   }
 
   render() {
-    let nombre = "Miguel"; 
+    let nombre = "Uriel"; 
     
     return (
       <div>
-        <A nombre={nombre}>
-          <p>Hijo de A, numero 1</p>
-          <p>Hijo de A, numero 2</p>
-        </A>
-        <B nombre={nombre}/>
+        <Formulario />
       </div>
     );
   }
