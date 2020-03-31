@@ -3,27 +3,36 @@ import { render } from 'react-dom';
 import Hello from './Hello';
 import './style.css';
 
-
 class Blog extends Component {
   constructor(props){
     super(props);
 
     this.state = {
-      articles: [
-        'Mi primer componente de React.',
-        'Introducción a React',
-        'Qué es React'
-      ]
-    }
-
+      articles: []
+    };
   }
 
-  render(){
+  // Code is invoked after the component is mounted/inserted into the DOM tree.
+  componentDidMount() {
+    let promesa =
+      fetch('https://jsonplaceholder.typicode.com/posts');
+
+    promesa.then((response) => {
+      response.json().then((data)=>{
+        console.log(data);
+        this.setState({
+          articles:data
+        });
+      })
+    })
+  }
+
+  render() {
     return(
       <div>
         {
-          this.state.articles.map((title)=> {
-            return <p>{title}</p>
+          this.state.articles.map((article) => {
+            return <p>{article.title}</p>
           })
         }
       </div>
@@ -31,13 +40,9 @@ class Blog extends Component {
   }
 }
 
-
 class App extends Component {
   constructor() {
     super();
-    this.state = {
-      name: 'React'
-    };
   }
 
   render() {
