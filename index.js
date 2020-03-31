@@ -3,6 +3,7 @@ import { render } from 'react-dom';
 import Hello from './Hello';
 import './style.css';
 
+
 class Blog extends Component {
   constructor(props){
     super(props);
@@ -32,7 +33,20 @@ class Blog extends Component {
       <div>
         {
           this.state.articles.map((article) => {
-            return <p>{article.title}</p>
+            return (
+              <div
+              // estilos por medio de selector de clase
+              className="card"
+              // estilos inline
+              style={
+                 {
+                     fontSize:'2em'
+                   , backgroundColor: '#E4EDF8'
+                  }  
+              }>
+                <p>{article.title}</p>
+              </div>
+            )
           })
         }
       </div>
@@ -54,5 +68,7 @@ class App extends Component {
     );
   }
 }
+
+
 
 render(<App />, document.getElementById('root'));
